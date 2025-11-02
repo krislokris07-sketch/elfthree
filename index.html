@@ -34,16 +34,23 @@
         }
 
         .container {
-            background-image: url('плашка_эльфийский_декодер.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 15% 10% 10%;
+            background: 
+                url('плашка_эльфийский_декодер.png') no-repeat center center,
+                rgba(40, 80, 40, 0.9);
+            background-size: cover;
+            background-blend-mode: overlay;
+            padding: 40px 30px;
+            border-radius: 20px;
             width: 100%;
-            min-height: 80vh;
+            max-width: 600px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.8),
+                0 0 0 2px #5a8c5a,
+                0 0 0 4px rgba(90, 140, 90, 0.3);
+            border: 3px solid #8fbc8f;
             margin: 0 auto;
+            min-height: 500px;
         }
 
         /* Эльфийка для десктопа */
@@ -52,7 +59,7 @@
             width: 400px;
             height: 528px;
             z-index: 10;
-            margin-right: -80px;
+            margin-right: -60px;
             flex-shrink: 0;
         }
 
@@ -70,7 +77,7 @@
             position: relative;
             width: 200px;
             height: 264px;
-            margin: -30px auto 10px;
+            margin: -40px auto 20px;
             z-index: 10;
         }
 
@@ -105,8 +112,8 @@
 
         .title {
             color: #98fb98;
-            font-size: clamp(1.8em, 5vw, 2.4em);
-            margin-bottom: 10px;
+            font-size: clamp(1.6em, 4vw, 2.2em);
+            margin-bottom: 8px;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
             font-family: 'Underdog', cursive;
             line-height: 1.2;
@@ -114,19 +121,19 @@
 
         .subtitle {
             color: #e0f7fa;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-style: italic;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
             line-height: 1.4;
-            font-size: clamp(0.9em, 3vw, 1.2em);
-            padding: 0 10px;
+            font-size: clamp(0.8em, 2.5vw, 1.1em);
+            padding: 0 5px;
         }
 
         .cipher-box {
-            background: rgba(40, 80, 40, 0.92);
-            padding: 20px 15px;
-            border-radius: 15px;
-            margin: 20px 0;
+            background: rgba(40, 80, 40, 0.85);
+            padding: 15px 12px;
+            border-radius: 12px;
+            margin: 15px 0;
             border: 2px solid #5a8c5a;
             box-shadow: 
                 inset 0 0 20px rgba(0,0,0,0.4),
@@ -134,19 +141,19 @@
         }
 
         .cipher-text {
-            font-size: clamp(1.4em, 6vw, 2em);
+            font-size: clamp(1.2em, 4vw, 1.8em);
             letter-spacing: 2px;
-            margin: 15px 0;
-            padding: 15px 10px;
+            margin: 12px 0;
+            padding: 12px 8px;
             background: rgba(0, 0, 0, 0.8);
-            border-radius: 12px;
+            border-radius: 10px;
             border: 2px solid #8fbc8f;
-            min-height: 80px;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 4px;
             line-height: 1.4;
         }
 
@@ -164,15 +171,15 @@
         .key {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
-            margin: 15px 0;
+            gap: 5px;
+            margin: 12px 0;
         }
 
         .key-item {
-            background: rgba(60, 100, 60, 0.98);
-            padding: 8px 4px;
-            border-radius: 8px;
-            font-size: clamp(0.8em, 3vw, 1em);
+            background: rgba(60, 100, 60, 0.95);
+            padding: 6px 3px;
+            border-radius: 6px;
+            font-size: clamp(0.7em, 2.5vw, 0.9em);
             border: 1px solid #8fbc8f;
             transition: all 0.3s ease;
             box-shadow: 0 3px 6px rgba(0,0,0,0.2);
@@ -180,19 +187,19 @@
         }
 
         .key-item:hover {
-            background: rgba(80, 120, 80, 0.98);
+            background: rgba(80, 120, 80, 0.95);
             transform: scale(1.05);
         }
 
         input {
             width: 100%;
-            padding: 14px 12px;
-            margin: 15px 0;
+            padding: 12px 10px;
+            margin: 12px 0;
             border: 2px solid #8fbc8f;
-            border-radius: 10px;
+            border-radius: 8px;
             background: rgba(255, 255, 255, 0.15);
             color: white;
-            font-size: clamp(1em, 4vw, 1.2em);
+            font-size: clamp(0.9em, 3.5vw, 1.1em);
             text-align: center;
             font-family: 'Georgia', serif;
             transition: all 0.3s ease;
@@ -216,18 +223,18 @@
             background: linear-gradient(135deg, #8fbc8f, #98fb98);
             color: #1a2f1a;
             border: none;
-            padding: 14px 30px;
-            border-radius: 25px;
-            font-size: clamp(1em, 4vw, 1.3em);
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: clamp(0.9em, 3.5vw, 1.2em);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 15px 0;
+            margin: 12px 0;
             font-family: 'Underdog', cursive;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.3);
             width: 100%;
-            max-width: 280px;
+            max-width: 250px;
         }
 
         button:hover {
@@ -236,10 +243,10 @@
         }
 
         .result {
-            margin-top: 20px;
-            padding: 18px 15px;
+            margin-top: 15px;
+            padding: 15px 12px;
             background: rgba(152, 251, 152, 0.2);
-            border-radius: 12px;
+            border-radius: 10px;
             border: 2px solid #98fb98;
             display: none;
             animation: fadeIn 0.6s ease;
@@ -252,15 +259,15 @@
 
         .success {
             color: #98fb98;
-            font-size: clamp(1em, 4vw, 1.3em);
-            line-height: 1.5;
+            font-size: clamp(0.9em, 3.5vw, 1.2em);
+            line-height: 1.4;
             text-shadow: 0 0 10px rgba(152, 251, 152, 0.6);
         }
 
         .hint {
-            font-size: clamp(0.8em, 3vw, 1em);
+            font-size: clamp(0.7em, 2.5vw, 0.9em);
             color: #b0e0b0;
-            margin-top: 15px;
+            margin-top: 10px;
             font-style: italic;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
             padding: 0 5px;
@@ -319,40 +326,39 @@
             }
             
             .container {
-                padding: 20% 8% 12%;
-                min-height: 70vh;
-                margin-top: 0;
+                padding: 30px 20px;
+                min-height: auto;
             }
             
             .cipher-box {
-                padding: 15px 10px;
-                margin: 15px 0;
+                padding: 12px 8px;
+                margin: 12px 0;
             }
             
             .cipher-text {
-                padding: 12px 8px;
-                min-height: 70px;
+                padding: 10px 6px;
+                min-height: 50px;
                 gap: 3px;
             }
             
             .key {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 5px;
+                gap: 4px;
             }
             
             .key-item {
-                padding: 6px 3px;
-                font-size: 0.8em;
+                padding: 5px 2px;
+                font-size: 0.7em;
             }
             
             input {
-                padding: 12px 10px;
-                margin: 12px 0;
+                padding: 10px 8px;
+                margin: 10px 0;
             }
             
             button {
-                padding: 12px 25px;
-                max-width: 250px;
+                padding: 10px 20px;
+                max-width: 220px;
             }
         }
 
@@ -363,81 +369,13 @@
             }
             
             .container {
-                padding: 25% 5% 10%;
-                min-height: 65vh;
+                padding: 25px 15px;
             }
             
             .elf-character-top {
                 width: 150px;
                 height: 198px;
-                margin: -20px auto 5px;
-            }
-            
-            .cipher-box {
-                padding: 12px 8px;
-            }
-            
-            .cipher-text {
-                font-size: 1.3em;
-                padding: 10px 6px;
-                min-height: 60px;
-            }
-            
-            .key {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 4px;
-            }
-            
-            .key-item {
-                padding: 5px 2px;
-                font-size: 0.75em;
-            }
-            
-            input {
-                padding: 10px 8px;
-                font-size: 1em;
-            }
-            
-            button {
-                padding: 10px 20px;
-                font-size: 1.1em;
-                max-width: 220px;
-            }
-            
-            .result {
-                padding: 15px 10px;
-                margin-top: 15px;
-            }
-            
-            .success {
-                font-size: 1em;
-                line-height: 1.4;
-            }
-        }
-
-        /* Портретная ориентация */
-        @media (max-width: 768px) and (orientation: portrait) {
-            .container {
-                min-height: 75vh;
-            }
-        }
-
-        /* Ландшафтная ориентация на мобильных */
-        @media (max-width: 900px) and (orientation: landscape) {
-            .container {
-                padding: 8% 5% 5%;
-                min-height: 90vh;
-            }
-            
-            .elf-character-top {
-                width: 120px;
-                height: 158px;
-                margin: -15px auto 5px;
-            }
-            
-            .cipher-text {
-                min-height: 50px;
-                font-size: 1.2em;
+                margin: -30px auto 15px;
             }
         }
     </style>
@@ -605,12 +543,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             createFireflies();
             displayAnimatedSymbols();
-        });
-
-        // Адаптация при изменении размера окна
-        window.addEventListener('resize', function() {
-            document.getElementById('fireflies').innerHTML = '';
-            createFireflies();
         });
     </script>
 </body>
