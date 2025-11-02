@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Эльфийский декодер - Тайна Чащи</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: #f0f0f0;
+            text-align: center;
+            background: url('фон_эльфийский_декодер.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .container {
+            background-image: url('плашка_эльфийский_декодер.png');
+            background-size: 600px 800px;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 80px 50px 60px;
+            width: 600px;
+            min-height: 800px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        }
+
+        /* Эльфийка слева от окна */
+        .elf-character-left {
+            position: relative;
+            width: 400px;
+            height: 528px;
+            z-index: 10;
+            margin-right: -80px;
+        }
+
+        .elf-character-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.7));
+            animation: float-elf-left 6s ease-in-out infinite;
+        }
+
+        @keyframes float-elf-left {
+            0%, 100% { 
+                transform: translateY(0px) rotate(-3deg); 
+            }
+            25% { 
+                transform: translateY(-12px) rotate(-1deg); 
+            }
+            75% { 
+                transform: translateY(8px) rotate(-5deg); 
+            }
+        }
+
+        .title {
+            color: #98fb98;
+            font-size: 2.4em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-family: 'Underdog', cursive;
+        }
+
+        .subtitle {
+            color: #e0f7fa;
+            margin-bottom: 35px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            line-height: 1.5;
+            font-size: 1.2em;
+        }
+
+        .cipher-box {
+            background: rgba(40, 80, 40, 0.92);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 3px solid #5a8c5a;
+            box-shadow: 
+                inset 0 0 30px rgba(0,0,0,0.4),
+                0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .cipher-text {
+            font-size: 2em;
+            letter-spacing: 4px;
+            margin: 25px 0;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 2px solid #8fbc8f;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .symbol {
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.4s);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        .key {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .key-item {
+            background: rgba(60, 100, 60, 0.98);
+            padding: 12px 8px;
+            border-radius: 10px;
+            font-size: 1em;
+            border: 2px solid #8fbc8f;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .key-item:hover {
+            background: rgba(80, 120, 80, 0.98);
+            transform: scale(1.08);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            margin: 20px 0;
+            border: 3px solid #8fbc8f;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #98fb98;
+            box-shadow: 0 0 20px rgba(152, 251, 152, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        input::placeholder {
+            color: #b0e0b0;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        button {
+            background: linear-gradient(135deg, #8fbc8f, #98fb98);
+            color: #1a2f1a;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            font-family: 'Underdog', cursive;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(152, 251, 152, 0.5);
+            background: linear-gradient(135deg, #98fb98, #a8ffa8);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(152, 251, 152, 0.25);
+            border-radius: 15px;
+            border: 3px solid #98fb98;
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success {
+            color: #98fb98;
+            font-size: 1.3em;
+            line-height: 1.6;
+            text-shadow: 0 0 15px rgba(152, 251, 152, 0.7);
+        }
+
+        .hint {
+            font-size: 1em;
+            color: #b0e0b0;
+            margin-top: 20px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .fireflies {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .firefly {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #98fb98;
+            border-radius: 50%;
+            filter: blur(1.5px);
+            animation: fly 25s linear infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, 100vh);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .container-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .elf-character-left {
+                width: 300px;
+                height: 396px;
+                margin-right: 0;
+                margin-bottom: -40px;
+            }
+            
+            .container {
+                padding: 70px 40px 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                background-size: 500px 700px;
+                width: 500px;
+                min-height: 700px;
+                padding: 60px 30px 40px;
+            }
+            
+            .elf-character-left {
+                width: 250px;
+                height: 330px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .cipher-text {
+                font-size: 1.6em;
+                padding: 20px;
+            }
+            
+            .key {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            input {
+                padding: 15px;
+                font-size: 1.1em;
+            }
+            
+            button {
+                padding: 15px 35px;
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 540px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                background-size: 400px 600px;
+                width: 400px;
+                min-height: 600px;
+                padding: 50px 20px 30px;
+            }
+            
+            .elf-character-left {
+                width: 200px;
+                height: 264px;
+                margin-bottom: -30px;
+            }
+            
+            .title {
+                font-size: 1.7em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+                margin-bottom: 25px;
+            }
+            
+            .cipher-text {
+                font-size: 1.4em;
+                padding: 15px;
+            }
+            
+            .key {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fireflies" id="fireflies"></div>
+    
+    <div class="container-wrapper">
+        <!-- Эльфийка слева от окна -->
+        <div class="elf-character-left">
+            <img src="эльфийка.png" alt="Эльфийка-отшельница">
+        </div>
+        
+        <div class="container">
+            <h1 class="title">🦌 Эльфийский Декодер</h1>
+            <p class="subtitle">"Расшифруй послание от эльфийки-отшельницы и узнай, где она спрятала твой дар..."</p>
+            
+            <div class="cipher-box">
+                <div class="cipher-text" id="cipherText">
+                    <!-- Символы добавятся через JS -->
+                </div>
+                
+                <div class="key">
+                    <div class="key-item">🌿 = в</div>
+                    <div class="key-item">🦌 = с</div>
+                    <div class="key-item">⭐ = в</div>
+                    <div class="key-item">🐇 = о</div>
+                    <div class="key-item">✨ = е</div>
+                    <div class="key-item">🦔 = й</div>
+                    <div class="key-item">🌌 = к</div>
+                    <div class="key-item">🪵 = о</div>
+                    <div class="key-item">🌊 = м</div>
+                    <div class="key-item">🎁 = н</div>
+                </div>
+                
+                <input type="text" id="answer" placeholder="Введите расшифрованное сообщение...">
+                <br>
+                <button onclick="checkAnswer()">✨ Расшифровать</button>
+                
+                <div class="hint">
+                    💡 Подсказка: Собери слово из символов выше
+                </div>
+            </div>
+            
+            <div class="result" id="result">
+                <div class="success" id="message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Создаем огоньки для атмосферы
+        function createFireflies() {
+            const firefliesContainer = document.getElementById('fireflies');
+            for (let i = 0; i < 15; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'firefly';
+                firefly.style.left = Math.random() * 100 + 'vw';
+                firefly.style.top = Math.random() * 100 + 'vh';
+                firefly.style.animationDelay = Math.random() * 25 + 's';
+                firefly.style.opacity = Math.random() * 0.7 + 0.2;
+                firefly.style.animationDuration = (15 + Math.random() * 20) + 's';
+                firefliesContainer.appendChild(firefly);
+            }
+        }
+
+        // Показываем анимированные символы
+        function displayAnimatedSymbols() {
+            const cipherText = document.getElementById('cipherText');
+            const symbols = "🌿🦌⭐🐇✨ 🦔🌌🪵🌊🎁".split('');
+            
+            symbols.forEach((symbol, index) => {
+                if (symbol === ' ') {
+                    cipherText.appendChild(document.createTextNode(' '));
+                } else {
+                    const span = document.createElement('span');
+                    span.className = 'symbol';
+                    span.textContent = symbol;
+                    span.style.setProperty('--i', index);
+                    cipherText.appendChild(span);
+                }
+            });
+        }
+
+        // Проверяем ответ
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answer').value.toLowerCase().trim();
+            const result = document.getElementById('result');
+            const message = document.getElementById('message');
+            
+            if (userAnswer === "в своей комнате") {
+                message.innerHTML = `
+                    ✨ <strong>Поздравляю! Ты расшифровал послание!</strong> ✨<br><br>
+                    "Эльфийка нашего дома спрятала твой дар в своей комнате. Приходи к ней..."<br><br>
+                    🎁 <em>Твоя награда ждет тебя там, где пахнет книгами и уютом...</em>
+                `;
+                result.style.display = 'block';
+                result.style.background = 'rgba(152, 251, 152, 0.3)';
+                
+                // Запускаем анимацию успеха
+                celebrateSuccess();
+            } else {
+                message.innerHTML = `
+                    ❌ Пока не совсем верно...<br><br>
+                    Посмотри внимательно на ключ и попробуй еще раз!
+                `;
+                result.style.display = 'block';
+                result.style.background = 'rgba(255, 100, 100, 0.3)';
+            }
+        }
+
+        // Анимация успеха
+        function celebrateSuccess() {
+            // Создаем падающие символы
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const symbol = document.createElement('div');
+                    const symbols = ['🌿', '✨', '🦌', '⭐', '🎁', '🦔', '🍂', '💫'];
+                    symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    symbol.style.position = 'fixed';
+                    symbol.style.left = Math.random() * 100 + 'vw';
+                    symbol.style.top = '-50px';
+                    symbol.style.fontSize = '24px';
+                    symbol.style.zIndex = '9999';
+                    symbol.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+                    symbol.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(symbol);
+                    
+                    setTimeout(() => symbol.remove(), 4000);
+                }, i * 80);
+            }
+        }
+
+        // Добавляем CSS для анимации падения
+        const fallStyle = document.createElement('style');
+        fallStyle.textContent = `
+            @keyframes fall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(fallStyle);
+
+        // Обработка нажатия Enter
+        document.getElementById('answer').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            createFireflies();
+            displayAnimatedSymbols();
+        });
+    </script>
+</body>
+</html>
