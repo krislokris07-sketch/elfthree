@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -50,13 +49,13 @@
             min-height: 500px;
         }
 
-        /* Остальной CSS код без изменений */
+        /* Эльфийка для десктопа */
         .elf-character-left {
             position: relative;
-            width: 400px;
-            height: 528px;
+            width: 450px;
+            height: 594px;
             z-index: 10;
-            margin-right: -60px;
+            margin-right: -80px;
             flex-shrink: 0;
         }
 
@@ -68,12 +67,13 @@
             animation: float-elf-left 6s ease-in-out infinite;
         }
 
+        /* Эльфийка для мобильных */
         .elf-character-top {
             display: none;
             position: relative;
-            width: 200px;
-            height: 264px;
-            margin: -40px auto 20px;
+            width: 240px;
+            height: 317px;
+            margin: -50px auto 25px;
             z-index: 10;
         }
 
@@ -241,11 +241,15 @@
         .result {
             margin-top: 15px;
             padding: 15px 12px;
-            background: rgba(152, 251, 152, 0.2);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            border: 2px solid #98fb98;
+            border: 2px solid #8fbc8f;
             display: none;
             animation: fadeIn 0.6s ease;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.5),
+                inset 0 0 20px rgba(152, 251, 152, 0.1);
+            backdrop-filter: blur(5px);
         }
 
         @keyframes fadeIn {
@@ -358,6 +362,7 @@
             }
         }
 
+        /* Очень маленькие экраны */
         @media (max-width: 480px) {
             body {
                 padding: 5px;
@@ -368,9 +373,9 @@
             }
             
             .elf-character-top {
-                width: 150px;
-                height: 198px;
-                margin: -30px auto 15px;
+                width: 180px;
+                height: 238px;
+                margin: -35px auto 20px;
             }
         }
     </style>
@@ -380,11 +385,13 @@
     <div class="fireflies" id="fireflies"></div>
     
     <div class="container-wrapper">
+        <!-- Эльфийка для десктопа -->
         <div class="elf-character-left">
             <img src="эльфийка.png" alt="Эльфийка-отшельница">
         </div>
         
         <div class="container">
+            <!-- Эльфийка для мобильных -->
             <div class="elf-character-top">
                 <img src="эльфийка.png" alt="Эльфийка-отшельница">
             </div>
@@ -426,6 +433,7 @@
     </div>
 
     <script>
+        // Создаем огоньки для атмосферы
         function createFireflies() {
             const firefliesContainer = document.getElementById('fireflies');
             const count = window.innerWidth < 768 ? 8 : 12;
@@ -442,6 +450,7 @@
             }
         }
 
+        // Показываем анимированные символы
         function displayAnimatedSymbols() {
             const cipherText = document.getElementById('cipherText');
             const symbols = "🌿🦌⭐🐇✨ 🦔🌌🪵🌊🎁".split('');
@@ -459,6 +468,7 @@
             });
         }
 
+        // Проверяем ответ
         function checkAnswer() {
             const userAnswer = document.getElementById('answer').value.toLowerCase().trim();
             const result = document.getElementById('result');
@@ -471,7 +481,6 @@
                     🎁 <em>Твоя награда ждет тебя там, где пахнет книгами и уютом...</em>
                 `;
                 result.style.display = 'block';
-                result.style.background = 'rgba(152, 251, 152, 0.25)';
                 
                 celebrateSuccess();
             } else {
@@ -480,10 +489,10 @@
                     Посмотри на ключ и попробуй еще раз!
                 `;
                 result.style.display = 'block';
-                result.style.background = 'rgba(255, 100, 100, 0.25)';
             }
         }
 
+        // Анимация успеха
         function celebrateSuccess() {
             const count = window.innerWidth < 768 ? 12 : 18;
             
@@ -505,6 +514,7 @@
             }
         }
 
+        // Добавляем CSS для анимации падения
         const fallStyle = document.createElement('style');
         fallStyle.textContent = `
             @keyframes fall {
@@ -520,12 +530,14 @@
         `;
         document.head.appendChild(fallStyle);
 
+        // Обработка нажатия Enter
         document.getElementById('answer').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkAnswer();
             }
         });
 
+        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             createFireflies();
             displayAnimatedSymbols();
