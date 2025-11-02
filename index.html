@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -34,11 +35,7 @@
         }
 
         .container {
-            background: 
-                url('плашка_эльфийский_декодер.png') no-repeat center center,
-                rgba(40, 80, 40, 0.9);
-            background-size: cover;
-            background-blend-mode: overlay;
+            background: rgba(40, 80, 40, 0.9);
             padding: 40px 30px;
             border-radius: 20px;
             width: 100%;
@@ -53,7 +50,7 @@
             min-height: 500px;
         }
 
-        /* Эльфийка для десктопа */
+        /* Остальной CSS код без изменений */
         .elf-character-left {
             position: relative;
             width: 400px;
@@ -71,7 +68,6 @@
             animation: float-elf-left 6s ease-in-out infinite;
         }
 
-        /* Эльфийка для мобильных */
         .elf-character-top {
             display: none;
             position: relative;
@@ -362,7 +358,6 @@
             }
         }
 
-        /* Очень маленькие экраны */
         @media (max-width: 480px) {
             body {
                 padding: 5px;
@@ -385,13 +380,11 @@
     <div class="fireflies" id="fireflies"></div>
     
     <div class="container-wrapper">
-        <!-- Эльфийка для десктопа -->
         <div class="elf-character-left">
             <img src="эльфийка.png" alt="Эльфийка-отшельница">
         </div>
         
         <div class="container">
-            <!-- Эльфийка для мобильных -->
             <div class="elf-character-top">
                 <img src="эльфийка.png" alt="Эльфийка-отшельница">
             </div>
@@ -433,7 +426,6 @@
     </div>
 
     <script>
-        // Создаем огоньки для атмосферы
         function createFireflies() {
             const firefliesContainer = document.getElementById('fireflies');
             const count = window.innerWidth < 768 ? 8 : 12;
@@ -450,7 +442,6 @@
             }
         }
 
-        // Показываем анимированные символы
         function displayAnimatedSymbols() {
             const cipherText = document.getElementById('cipherText');
             const symbols = "🌿🦌⭐🐇✨ 🦔🌌🪵🌊🎁".split('');
@@ -468,7 +459,6 @@
             });
         }
 
-        // Проверяем ответ
         function checkAnswer() {
             const userAnswer = document.getElementById('answer').value.toLowerCase().trim();
             const result = document.getElementById('result');
@@ -494,7 +484,6 @@
             }
         }
 
-        // Анимация успеха
         function celebrateSuccess() {
             const count = window.innerWidth < 768 ? 12 : 18;
             
@@ -516,7 +505,6 @@
             }
         }
 
-        // Добавляем CSS для анимации падения
         const fallStyle = document.createElement('style');
         fallStyle.textContent = `
             @keyframes fall {
@@ -532,14 +520,12 @@
         `;
         document.head.appendChild(fallStyle);
 
-        // Обработка нажатия Enter
         document.getElementById('answer').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkAnswer();
             }
         });
 
-        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             createFireflies();
             displayAnimatedSymbols();
